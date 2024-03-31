@@ -1,5 +1,4 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import Image from '../../../public/posgass logo.jpg';
 import React from 'react';
 import * as Yup from 'yup';
 import { useEventRegistrationState } from './context';
@@ -29,7 +28,7 @@ export const RegistrationPage = () => {
       <div className='text-center'>
         <div className='my-3 flex items-center justify-center'>
           <img
-            src={'/public/images/posgass-logo.jpg'}
+            src={'/images/posgass-logo.jpg'}
             alt='pogsass logo'
             width={100}
             height={100}
