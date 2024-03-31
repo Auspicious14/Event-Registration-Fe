@@ -14,7 +14,7 @@ export const RegistrationPage = () => {
   const { loading, eventRegistration } = useEventRegistrationState();
 
   const handleSubmit = (val: any, actions: any) => {
-    eventRegistration(val.email, val.password).then((res) => {
+    eventRegistration(val.email, val.phoneNumber).then((res) => {
       if (res) {
         actions.resetForm({
           values: {
