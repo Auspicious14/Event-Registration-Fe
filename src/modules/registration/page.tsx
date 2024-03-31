@@ -36,12 +36,12 @@ export const RegistrationPage = () => {
             height={100}
           />
         </div>
-        <h1 className='mb-4 text-4xl font-bold'>
+        <h1 className='mb-4 text-xl font-bold'>
           Register for the POGSASS Innovation Conference and Workshop.
         </h1>
         <div>
           <p className='font-bold'>Theme:</p>
-          <p className='text-4xl font-bold text-green-500'>
+          <p className='text-2xl font-bold text-green-500'>
             {' '}
             Research For Innovation and Commercialization:
           </p>
