@@ -7,17 +7,19 @@ const FormSchema = Yup.object().shape({
   email: Yup.string()
     .required('Email is required')
     .email('Please input a valid email'),
+  phoneNumber: Yup.string().required('Phone Number is required'),
 });
 
 export const RegistrationPage = () => {
   const { loading, eventRegistration } = useEventRegistrationState();
 
   const handleSubmit = (val: any, actions: any) => {
-    eventRegistration(val.email).then((res) => {
+    eventRegistration(val.email, val.password).then((res) => {
       if (res) {
         actions.resetForm({
           values: {
             email: '',
+            phoneNumber: '',
           },
         });
       }
@@ -34,7 +36,9 @@ export const RegistrationPage = () => {
             height={100}
           />
         </div>
-        <h1 className='mb-4 text-4xl font-bold'>Sign Up for waitlist</h1>
+        <h1 className='mb-4 text-4xl font-bold'>
+          Register for the POGSASS Innovation Conference and Workshop.
+        </h1>
         <div>
           <p className='font-bold'>Theme:</p>
           <p className='text-4xl font-bold text-green-500'>
@@ -48,7 +52,7 @@ export const RegistrationPage = () => {
         </div>
         <Formik
           enableReinitialize
-          initialValues={{ email: '' }}
+          initialValues={{ email: '', phoneNumber: '' }}
           validationSchema={FormSchema}
           onSubmit={handleSubmit}
         >
@@ -59,9 +63,20 @@ export const RegistrationPage = () => {
               placeholder='Enter your email here'
               className='my-4 w-full rounded-md p-2 outline-none'
             />
+            <Field
+              name='phoneNumber'
+              type='tel'
+              placeholder='Enter your phone number here'
+              className='my-4 w-full rounded-md p-2 outline-none'
+            />
             <ErrorMessage
               className='text-red-500'
               name={'email'}
+              component='div'
+            />
+            <ErrorMessage
+              className='text-red-500'
+              name={'phoneNumber'}
               component='div'
             />
             <button

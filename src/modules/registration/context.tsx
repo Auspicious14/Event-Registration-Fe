@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 interface IEventRegistrationState {
   loading: boolean;
-  eventRegistration: (email: string) => Promise<any>;
+  eventRegistration: (email: string, phoneNumber: string) => Promise<any>;
 }
 
 const EventRegistrationContext = React.createContext<IEventRegistrationState>({
@@ -31,7 +31,7 @@ export const EventRegistrationContextProvider: React.FC<IProps> = ({
 }) => {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const eventRegistration = async (email: string) => {
+  const eventRegistration = async (email: string, phoneNumber: string) => {
     setLoading(true);
     console.log(JSON.stringify(email));
     try {
@@ -42,7 +42,7 @@ export const EventRegistrationContextProvider: React.FC<IProps> = ({
         },
         method: 'POST',
         url: `${process.env.NEXT_PUBLIC_API_ROUTE}/event-registration`,
-        data: JSON.stringify({ email }),
+        data: JSON.stringify({ email, phoneNumber }),
       });
       setLoading(false);
       const data = await res.data;
