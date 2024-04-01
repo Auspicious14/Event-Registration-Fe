@@ -3,23 +3,38 @@ import React from 'react';
 import * as Yup from 'yup';
 import { useEventRegistrationState } from './context';
 
+const Options = [
+  {
+    label: 'AI Tools for Research',
+    value: 'AI Tools for Research',
+  },
+  {
+    label: 'Statistical Tools for Research',
+    value: 'Statistical Tools for Research',
+  },
+];
 const FormSchema = Yup.object().shape({
   email: Yup.string()
-    .required('Email is required')
+    .required('Email is required to be input')
     .email('Please input a valid email'),
-  phoneNumber: Yup.string().required('Phone Number is required'),
+  phoneNumber: Yup.string().required('Phone Number is required to be input'),
+  workshopEvent: Yup.string().required(
+    'Workshop Event is required to be selected'
+  ),
 });
 
 export const RegistrationPage = () => {
   const { loading, eventRegistration } = useEventRegistrationState();
 
   const handleSubmit = (val: any, actions: any) => {
-    eventRegistration(val.email, val.phoneNumber).then((res) => {
+    console.log(val);
+    eventRegistration(val).then((res) => {
       if (res) {
         actions.resetForm({
           values: {
             email: '',
             phoneNumber: '',
+            workshopEvent: '',
           },
         });
       }
@@ -52,7 +67,11 @@ export const RegistrationPage = () => {
         </div>
         <Formik
           enableReinitialize
-          initialValues={{ email: '', phoneNumber: '' }}
+          initialValues={{
+            email: '',
+            phoneNumber: '',
+            workshopEvent: 'AI Tools for Research',
+          }}
           validationSchema={FormSchema}
           onSubmit={handleSubmit}
         >
@@ -69,6 +88,20 @@ export const RegistrationPage = () => {
               placeholder='Enter your phone number here'
               className='my-4 w-full rounded-md p-2 outline-none'
             />
+            <label className='flex justify-start'>
+              Select Workshop Event for Day 2
+            </label>
+            <Field
+              as='select'
+              name='workshopEvent'
+              className='my-4 w-full rounded-md p-2 outline-none'
+            >
+              {Options.map((o, i: number) => (
+                <option key={i} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </Field>
             <ErrorMessage
               className='text-red-500'
               name={'email'}
@@ -77,6 +110,11 @@ export const RegistrationPage = () => {
             <ErrorMessage
               className='text-red-500'
               name={'phoneNumber'}
+              component='div'
+            />
+            <ErrorMessage
+              className='text-red-500'
+              name={'workshopEvent'}
               component='div'
             />
             <button

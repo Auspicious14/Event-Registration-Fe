@@ -1,10 +1,11 @@
 import axios, { AxiosError } from 'axios';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import { IEventReg } from '../model';
 
 interface IEventRegistrationState {
   loading: boolean;
-  eventRegistration: (email: string, phoneNumber: string) => Promise<any>;
+  eventRegistration: (payload: IEventReg) => Promise<any>;
 }
 
 const EventRegistrationContext = React.createContext<IEventRegistrationState>({
@@ -31,9 +32,9 @@ export const EventRegistrationContextProvider: React.FC<IProps> = ({
 }) => {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const eventRegistration = async (email: string, phoneNumber: string) => {
+  const eventRegistration = async (payload: IEventReg) => {
     setLoading(true);
-    console.log(JSON.stringify(email));
+    console.log(JSON.stringify(payload));
     try {
       const res = await axios({
         headers: {
@@ -42,7 +43,7 @@ export const EventRegistrationContextProvider: React.FC<IProps> = ({
         },
         method: 'POST',
         url: `${process.env.NEXT_PUBLIC_API_ROUTE}/event-registration`,
-        data: JSON.stringify({ email, phoneNumber }),
+        data: JSON.stringify(payload),
       });
       setLoading(false);
       const data = await res.data;
