@@ -1,16 +1,17 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+
 import { IEventReg } from '../model';
 
 interface IEventRegistrationState {
   loading: boolean;
-  eventRegistration: (payload: IEventReg) => Promise<any>;
+  eventRegistration: (payload: IEventReg) => Promise<string>;
 }
 
 const EventRegistrationContext = React.createContext<IEventRegistrationState>({
   loading: false,
-  eventRegistration(email) {
+  eventRegistration() {
     return null as any;
   },
 });
@@ -34,7 +35,6 @@ export const EventRegistrationContextProvider: React.FC<IProps> = ({
 
   const eventRegistration = async (payload: IEventReg) => {
     setLoading(true);
-    console.log(JSON.stringify(payload));
     try {
       const res = await axios({
         headers: {
@@ -47,13 +47,11 @@ export const EventRegistrationContextProvider: React.FC<IProps> = ({
       });
       setLoading(false);
       const data = await res.data;
-      console.log(data);
       if (data) {
         toast.success(data);
       }
       return data;
     } catch (error: any) {
-      console.log(error?.response?.data?.error);
       setLoading(false);
       toast.error(error?.response?.data?.error);
     }

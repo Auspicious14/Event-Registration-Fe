@@ -1,4 +1,5 @@
 import React, { ComponentProps, FC } from 'react';
+
 import { EventRegistrationContextProvider } from './modules/registration/context';
 
 export const combineContext = (...components: FC[]): FC<any> => {

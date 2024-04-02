@@ -1,7 +1,10 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
+import Image from 'next/image';
 import React from 'react';
 import * as Yup from 'yup';
+
 import { useEventRegistrationState } from './context';
+import { IEventReg } from '../model';
 
 const Options = [
   {
@@ -26,8 +29,14 @@ const FormSchema = Yup.object().shape({
 export const RegistrationPage = () => {
   const { loading, eventRegistration } = useEventRegistrationState();
 
-  const handleSubmit = (val: any, actions: any) => {
-    console.log(val);
+  const handleSubmit = (
+    val: IEventReg,
+    actions: {
+      resetForm: (arg0: {
+        values: { email: string; phoneNumber: string; workshopEvent: string };
+      }) => void;
+    }
+  ) => {
     eventRegistration(val).then((res) => {
       if (res) {
         actions.resetForm({
@@ -44,8 +53,8 @@ export const RegistrationPage = () => {
     <div className='font-primary translate-y-1/5 mx-12 flex -translate-x-[0%] transform items-center justify-center md:mx-0 md:translate-y-1/4'>
       <div className='text-center'>
         <div className='my-3 flex items-center justify-center'>
-          <img
-            src={'/images/posgass-logo.jpg'}
+          <Image
+            src='/images/posgass-logo.jpg'
             alt='pogsass logo'
             width={100}
             height={100}
@@ -104,17 +113,17 @@ export const RegistrationPage = () => {
             </Field>
             <ErrorMessage
               className='text-red-500'
-              name={'email'}
+              name='email'
               component='div'
             />
             <ErrorMessage
               className='text-red-500'
-              name={'phoneNumber'}
+              name='phoneNumber'
               component='div'
             />
             <ErrorMessage
               className='text-red-500'
-              name={'workshopEvent'}
+              name='workshopEvent'
               component='div'
             />
             <button
