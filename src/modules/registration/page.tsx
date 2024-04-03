@@ -50,7 +50,7 @@ export const RegistrationPage = () => {
     });
   };
   return (
-    <div className='font-primary translate-y-1/5 mx-12 flex -translate-x-[0%] transform items-center justify-center md:mx-0 md:translate-y-1/4'>
+    <div className='font-primary translate-y-1/5 mx-12 flex -translate-x-[0%] transform items-center justify-center md:mx-0'>
       <div className='text-center'>
         <ApCountDown countDownDate='Apr 22 2024 10:00:00' />
         <div className='my-3 flex items-center justify-center'>
