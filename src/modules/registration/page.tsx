@@ -2,9 +2,9 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Image from 'next/image';
 import React from 'react';
 import * as Yup from 'yup';
-
 import { useEventRegistrationState } from './context';
-import { IEventReg } from '../model';
+import { IEventReg } from './model';
+import { ApCountDown } from '../../components';
 
 const Options = [
   {
@@ -52,6 +52,7 @@ export const RegistrationPage = () => {
   return (
     <div className='font-primary translate-y-1/5 mx-12 flex -translate-x-[0%] transform items-center justify-center md:mx-0 md:translate-y-1/4'>
       <div className='text-center'>
+        <ApCountDown countDownDate='Apr 22 2024 10:00:00' />
         <div className='my-3 flex items-center justify-center'>
           <Image
             src='/images/posgass-logo.jpg'

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { IEventReg } from '../model';
+import { IEventReg } from './model';
 
 interface IEventRegistrationState {
   loading: boolean;

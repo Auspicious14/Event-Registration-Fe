@@ -2,7 +2,7 @@ import '../styles/globals.css';
 import '../styles/colors.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { SpeedInsights } from '@vercel/speed-insights/next';
+// import { SpeedInsights } from '@vercel/speed-insights/next';
 import { AppProps } from 'next/app';
 import { ToastContainer } from 'react-toastify';
 
@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         pauseOnHover
         theme='light'
       />
-      <SpeedInsights />
+      {/* <SpeedInsights /> */}
     </AppContextProvider>
   );
 }
