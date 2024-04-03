@@ -33,5 +33,5 @@ export const ApCountDown: React.FC<IProps> = ({ countDownDate }) => {
     return () => clearInterval(interval);
   }, []);
 
-  return <div className='text-xl font-bold'>{`${timer}`}</div>;
+  return <div className='text-5xl font-bold text-green-500'>{`${timer}`}</div>;
 };
