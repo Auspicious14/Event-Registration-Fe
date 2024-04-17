@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import { useEventRegistrationState } from './context';
 import { IEventReg } from './model';
@@ -27,7 +27,20 @@ const FormSchema = Yup.object().shape({
 });
 
 export const RegistrationPage = () => {
-  const { loading, eventRegistration } = useEventRegistrationState();
+  const {
+    loading,
+    totalRecords,
+    aITotalRecords,
+    statTotalRecords,
+    eventRegistration,
+    getAllAttendees,
+    getAllAttendeesByEvent,
+  } = useEventRegistrationState();
+
+  useEffect(() => {
+    getAllAttendees();
+    getAllAttendeesByEvent();
+  }, []);
 
   const handleSubmit = (
     val: IEventReg,
@@ -49,10 +62,27 @@ export const RegistrationPage = () => {
       }
     });
   };
+
   return (
     <div className='font-primary translate-y-1/5 mx-12 flex -translate-x-[0%] transform items-center justify-center md:mx-0'>
       <div className='text-center'>
         <ApCountDown countDownDate='Apr 22 2024 10:00:00' />
+        <div className='my-4 flex items-center justify-center text-xl'>
+          <div>
+            <div className='flex items-center gap-2'>
+              <p>Total Attendees: </p>
+              <p className='font-semibold'>{totalRecords}</p>
+            </div>
+            <div className='flex items-center gap-2'>
+              <p>Workshop Event 1 Attendees: </p>
+              <p className='font-semibold'>{aITotalRecords}</p>
+            </div>
+            <div className='flex items-center gap-2'>
+              <p>Workshop Event 2 Attendees: </p>
+              <p className='font-semibold'>{statTotalRecords}</p>
+            </div>
+          </div>
+        </div>
         <div className='my-3 flex items-center justify-center'>
           <Image
             src='/images/posgass-logo.jpg'
